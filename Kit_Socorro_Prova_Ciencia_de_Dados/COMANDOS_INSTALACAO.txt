@@ -1,0 +1,9 @@
+Instalar dependências:
+
+pip install -r requirements.txt
+
+Abrir o notebook:
+
+jupyter notebook notebooks/Guia_Pratico_Completo.ipynb
+
+Ou usar Google Colab e enviar o notebook.

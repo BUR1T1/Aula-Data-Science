@@ -1,0 +1,12 @@
+﻿.venv/
+.python/
+.uv-cache/
+.ipython/
+.jupyter/
+.publish-repo/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+*.log
+.env
+.env.*

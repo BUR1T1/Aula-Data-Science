@@ -1,0 +1,91 @@
+=============================
+CHEATSHEET - CIÊNCIA DE DADOS
+=============================
+
+IMPORTS
+-------
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy import stats
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import root_mean_squared_error, r2_score
+
+PANDAS
+------
+df.head()
+df.info()
+df.describe()
+df.columns
+df.shape
+
+df['x'].mean()
+df['x'].median()
+df['x'].mode()[0]
+df['x'].std()
+
+df[df['x'] > 10]
+df[(df['x'] > 10) & (df['x'] < 20)]
+
+df.groupby('grupo')['valor'].mean()
+
+OUTLIER
+-------
+q1 = df['x'].quantile(0.25)
+q3 = df['x'].quantile(0.75)
+iqr = q3 - q1
+li = q1 - 1.5 * iqr
+ls = q3 + 1.5 * iqr
+limpo = df[(df['x'] >= li) & (df['x'] <= ls)]
+
+GRÁFICOS
+--------
+sns.countplot(data=df, x='grupo')
+sns.barplot(data=df, x='grupo', y='valor')
+sns.boxplot(data=df, y='valor')
+sns.scatterplot(data=df, x='x', y='y')
+sns.lineplot(data=df, x='data', y='valor')
+sns.heatmap(df.corr(numeric_only=True), annot=True)
+plt.show()
+
+CORRELAÇÃO
+----------
+df['x'].corr(df['y'])
+df['x'].corr(df['y'], method='pearson')
+df['x'].corr(df['y'], method='spearman')
+
+TESTE A/B
+---------
+A = df[df['grupo'] == 'A']['valor']
+B = df[df['grupo'] == 'B']['valor']
+t, p = stats.ttest_ind(A, B)
+
+p < 0.05  -> rejeita H0
+p >= 0.05 -> não rejeita H0
+
+REGRESSÃO
+---------
+X = df[['x']]
+y = df['y']
+
+modelo = LinearRegression()
+modelo.fit(X, y)
+
+pred = modelo.predict(X)
+r2 = r2_score(y, pred)
+rmse = root_mean_squared_error(y, pred)
+
+novo = modelo.predict([[45]])[0]
+
+LGPD
+----
+CIA:
+C = Confidencialidade
+I = Integridade
+A = Disponibilidade
+
+Princípios:
+Finalidade
+Adequação
+Minimização
